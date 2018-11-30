@@ -1,0 +1,23 @@
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+#...
+
+
+  - job_name: kickstart_tftp
+    scrape_interval: 20s
+    scrape_timeout: 10s
+    params:
+      module: [tftp]
+      tftp_filename: [pxelinux.0]
+    static_configs:
+       - targets:
+         - 'tftpserver1.domain'
+	 - 'tftpserver2.domain'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 127.0.0.1:9519  # The tftp exporter's real hostname:port.

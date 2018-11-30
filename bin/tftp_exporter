@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+
+"""
+Program to do some simple TFTP get-requests for the files and targets specified in the Prometheus config.
+Will track request-time, bytes received, bytes/s and return this.
+This can be run on any server - the targets to check are defined in the call - Like the blackbox_exporter.
+"""
+
+from __future__ import print_function
+
+import sys
+import re
+from tftp_exporter.http import start_http_server
+
+
+def main():
+    """Entrypoint for the Prometheus TFTP exporter."""
+
+    for arg in sys.argv:
+        if re.search(r'(-)?h(elp)?|\?', arg):
+            print('Usage: tftp_exporter [port]')
+            print('Port 9519 is the default if nothing is entered.')
+            sys.exit(1)
+
+    port = None
+    try:
+        if len(sys.argv) == 2:
+            port = int(sys.argv[1])
+        else:
+            port = 9519
+    except ValueError as ve:
+        print('Port value error: ' + ve.message)
+
+    if port:
+        start_http_server(port)
+    else:
+        print('No valid port specified - Quitting.')
+
+
+if __name__ == '__main__':
+    main()
