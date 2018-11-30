@@ -50,8 +50,8 @@ As this isn't a "normal" client-side test, we will also test the DNS and Network
 If you want to run in on your clients - it's also possible, and then just use localhost as the hostname. With a server config to point out all the clients.
 
 
-Run `tftp_exporter.py`, and then visit http://localhost:XXXX/?hostname=foo.bar
-where foo.bar is is the dns-name of the TFT-service to probe.
+Run `tftp_exporter.py`, and then visit http://127.0.0.1:9519/metrics??module=tftp&target=tftpserver1.domain&tftp_filename=pxelinux.0
+where target is is the dns-name of the TFT-service to probe and tftp_filename is the name of the file on the TFTP-server to get..
 The metrics will be tagged with the hostnames for easy identifying.
 
 ## Metrics
