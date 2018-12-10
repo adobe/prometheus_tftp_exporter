@@ -6,6 +6,11 @@ It's designed to be able to run on the Prometheus server directly.
 Doing it remote measures network performance as well as it actually transfers a file over the network.
 Calling a client_exporter would just send a few bytes with the result over the network using HTTP.
 
+## Requirements
+
+ * Python 2.7 or 3
+ * [prometheus\_client](https://github.com/prometheus/client_python)
+ * Systems own tftp-client (Developed using output from RedHat/CentOS 'tftp')
 
 ## Usage
 
@@ -74,3 +79,27 @@ Where instance is the targets specified in the config, and job is the scrape_con
 There are two components. An exporter that does the actual scraping,
 and a generator that creates the configuration for use by the exporter.
 The scraping can be done in parallel as the probing is done in a fork.
+
+
+## Exported metrics
+For each of the targets specified you will get the following info.
+| Name                            | Type  | Description                                          |
+| ------------------------------- | ----- | ---------------------------------------------------- |
+| tftp_probe_duration_seconds     | gauge | Returns how long the probe took to return in seconds |
+| tftp_probe_success              | gauge | Displays whether or not the probe was a success      |
+| tftp_probe_dl_speed             | gauge | Returns the download speed in KB/s                   |
+| tftp_probe_content_length_bytes | gauge | Content bytes received                               |
+
+
+## Packaging
+###
+python setup.py sdist
+Will create a tar.gz archive with all the files - as well as setup script to help you get it running.
+Distribute and unpack, run the bin/install.sh with the full path to the original archive-file and you will get it set up under /opt/.
+
+### RPM
+To create a CentOS RPM-package that has dependencies on the required tftp package, and SystemD init-scripts.
+Install build-requirements: yum install rpm-build
+
+Then run: python setup.py bdist --formats=rpm
+
