@@ -83,6 +83,7 @@ The scraping can be done in parallel as the probing is done in a fork.
 
 ## Exported metrics
 For each of the targets specified you will get the following info.
+
 | Name                            | Type  | Description                                          |
 | ------------------------------- | ----- | ---------------------------------------------------- |
 | tftp_probe_duration_seconds     | gauge | Returns how long the probe took to return in seconds |
