@@ -104,3 +104,11 @@ Install build-requirements: yum install rpm-build
 
 Then run: python setup.py bdist --formats=rpm
 
+### Contributing
+
+Contributions are welcomed! Read the [Contributing Guide](CONTRIBUTING.md) for more information.
+
+### Licensing
+
+This project is licensed under the Apache V2 License. See [LICENSE](LICENSE) for more information.
+
