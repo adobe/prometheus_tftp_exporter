@@ -24,7 +24,7 @@ from tftp_exporter.http import start_http_server
 
 
 def main():
-    """Entrypoint for the Prometheus TFTP exporter."""
+    """Entry-point for the Prometheus TFTP exporter."""
 
     for arg in sys.argv:
         if re.search(r'(-)?h(elp)?|\?', arg):
