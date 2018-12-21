@@ -43,7 +43,7 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: 127.0.0.1:9519  # The tftp exporter's real hostname:port.
+        replacement: 127.0.0.1:9522  # The tftp exporter's real hostname:port.
 ```
 
 The configuration contains information about which file to retrieve using TFTP - and the targets to test.
@@ -55,7 +55,7 @@ As this isn't a "normal" client-side test, we will also test the DNS and Network
 If you want to run in on your clients - it's also possible, and then just use localhost as the hostname. With a server config to point out all the clients.
 
 
-Run `tftp_exporter.py`, and then visit http://127.0.0.1:9519/metrics??module=tftp&target=tftpserver1.domain&tftp_filename=pxelinux.0
+Run `tftp_exporter.py`, and then visit http://127.0.0.1:9522/metrics??module=tftp&target=tftpserver1.domain&tftp_filename=pxelinux.0
 where target is is the dns-name of the TFT-service to probe and tftp_filename is the name of the file on the TFTP-server to get..
 The metrics will be tagged with the hostnames for easy identifying.
 
@@ -79,7 +79,6 @@ Where instance is the targets specified in the config, and job is the scrape_con
 There are two components. An exporter that does the actual scraping,
 and a generator that creates the configuration for use by the exporter.
 The scraping can be done in parallel as the probing is done in a fork.
-
 
 ## Exported metrics
 For each of the targets specified you will get the following info.
@@ -111,4 +110,3 @@ Contributions are welcomed! Read the [Contributing Guide](CONTRIBUTING.md) for m
 ### Licensing
 
 This project is licensed under the Apache V2 License. See [LICENSE](LICENSE) for more information.
-

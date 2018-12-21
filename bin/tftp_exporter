@@ -29,7 +29,7 @@ def main():
     for arg in sys.argv:
         if re.search(r'(-)?h(elp)?|\?', arg):
             print('Usage: tftp_exporter [port]')
-            print('Port 9519 is the default if nothing is entered.')
+            print('Port 9522 is the default if nothing is entered.')
             sys.exit(1)
 
     port = None
@@ -37,7 +37,7 @@ def main():
         if len(sys.argv) == 2:
             port = int(sys.argv[1])
         else:
-            port = 9519
+            port = 9522
     except ValueError as ve:
         print('Port value error: ' + ve.message)
 
